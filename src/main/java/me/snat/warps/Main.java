@@ -15,7 +15,7 @@ public final class Main extends JavaPlugin {
         getCommand("warp").setExecutor(new WarpCommand(this));
         getCommand("setwarp").setExecutor(new SetWarpCommand(this));
         getCommand("delwarp").setExecutor(new DeleteWarpCommand(this));
-
+        
         warpManager = new WarpManager(this);
     }
 

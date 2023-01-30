@@ -32,24 +32,18 @@ public class WarpCommand implements CommandExecutor {
             for(String warp : warps.getKeys(false)) {
                 player.sendMessage(warp);
             }
-            return false;
+            return true;
         }
 
-        if (warps.get(args[0]) == null) {
+        if (!warps.contains(args[0])) {
             player.sendMessage(ChatColor.RED + "That warp does not exist!");
-            return false;
+            return true;
         }
 
-        double x =  warps.getDouble(args[0] + ".X");
-        double y =  warps.getDouble(args[0] + ".Y");
-        double z =  warps.getDouble(args[0] + ".Z");
-        float yaw = (float)  warps.getDouble(args[0] + ".Yaw");
-        float pitch = (float)  warps.getDouble(args[0] + ".Pitch");
-        String world =  warps.getString(args[0] + ".World");
-        Location loc = new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
+        Location loc = main.getWarpManager().getWarp(warps.getLocation(args[0] + ".location"));
 
         player.teleport(loc);
         player.sendMessage(ChatColor.GOLD + "You have been teleported to " + args[0] + ".");
-        return false;
+        return true;
     }
 }

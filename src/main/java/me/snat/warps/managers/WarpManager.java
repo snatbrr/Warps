@@ -1,6 +1,7 @@
 package me.snat.warps.managers;
 
 import me.snat.warps.Main;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -16,16 +17,16 @@ public class WarpManager {
     public WarpManager(Main main) {
         this.main = main;
         this.file = new File(main.getDataFolder(), "warps.yml");
-        this.warps = YamlConfiguration.loadConfiguration(file);
 
         if (!file.exists()) {
             try {
                 file.createNewFile();
-                warps = YamlConfiguration.loadConfiguration(file);
             } catch (IOException e) {
                 System.out.println("Could not load warps.yml");
             }
         }
+
+        warps = YamlConfiguration.loadConfiguration(file);
     }
 
 
@@ -36,6 +37,12 @@ public class WarpManager {
             System.out.println("Could not save warps.yml");
         }
     }
+
+    public void setWarp(String name, Location location) {
+        warps.set(name + ".location", location);
+    }
+
+    public Location getWarp(Location location) { return location; }
 
     public YamlConfiguration getWarps() { return warps; }
 }

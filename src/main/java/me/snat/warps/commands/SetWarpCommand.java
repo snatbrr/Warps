@@ -27,26 +27,21 @@ public class SetWarpCommand implements CommandExecutor {
 
         if (args.length == 0) {
             player.sendMessage(ChatColor.RED + "Please specify a name for the warp.");
-            return false;
+            return true;
         }
 
-        if (warps.get(args[0]) != null) {
+        if (warps.contains(args[0])) {
             player.sendMessage(ChatColor.RED + "A warp with that name already exists.");
-            return false;
+            return true;
         }
 
         Location loc = player.getLocation();
 
-        warps.set(args[0] + ".X", loc.getX());
-        warps.set(args[0] + ".Y", loc.getY());
-        warps.set(args[0] + ".Z", loc.getZ());
-        warps.set(args[0] + ".Pitch", loc.getPitch());
-        warps.set(args[0] + ".Yaw", loc.getYaw());
-        warps.set(args[0] + ".World", loc.getWorld().getName());
+        main.getWarpManager().setWarp(args[0], loc);
         main.getWarpManager().saveWarps();
 
         player.sendMessage(ChatColor.GOLD + "Warp " + args[0] + " has been created!" );
 
-        return false;
+        return true;
     }
 }

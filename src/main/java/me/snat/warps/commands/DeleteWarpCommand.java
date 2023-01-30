@@ -27,17 +27,17 @@ public class DeleteWarpCommand implements CommandExecutor {
 
         if (args.length == 0) {
             player.sendMessage(ChatColor.RED + "Please specify a warp name.");
-            return false;
+            return true;
         }
 
-        if (warps.get(args[0]) == null) {
+        if (!warps.contains(args[0])) {
             player.sendMessage(ChatColor.RED + "That warp does not exist.");
-            return false;
+            return true;
         }
 
         warps.set(args[0], null);
         main.getWarpManager().saveWarps();
         player.sendMessage(ChatColor.GOLD + "Warp " + args[0] + " has been deleted!");
-        return false;
+        return true;
     }
 }
