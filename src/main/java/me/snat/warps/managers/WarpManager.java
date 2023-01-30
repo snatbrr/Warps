@@ -42,7 +42,9 @@ public class WarpManager {
         warps.set(name + ".location", location);
     }
 
-    public Location getWarp(Location location) { return location; }
+    public Location getWarp(String name) {
+        return warps.getLocation(name + ".location");
+    }
 
     public YamlConfiguration getWarps() { return warps; }
 }

@@ -40,9 +40,7 @@ public class WarpCommand implements CommandExecutor {
             return true;
         }
 
-        Location loc = main.getWarpManager().getWarp(warps.getLocation(args[0] + ".location"));
-
-        player.teleport(loc);
+        player.teleport(main.getWarpManager().getWarp(args[0]));
         player.sendMessage(ChatColor.GOLD + "You have been teleported to " + args[0] + ".");
         return true;
     }
